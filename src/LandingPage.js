@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 function LandingPage({ onStart }) {
   useEffect(() => {
     // Browser SpeechRecognition API
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
     if (!SpeechRecognition) {
       console.warn("Browser does not support Speech Recognition API");
       return;
@@ -15,11 +17,14 @@ function LandingPage({ onStart }) {
     recognition.lang = 'en-US';
 
     recognition.onresult = (event) => {
-      const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
+      const transcript =
+        event.results[event.results.length - 1][0].transcript.toLowerCase();
+
       console.log("Detected speech:", transcript);
+
       if (transcript.includes('wake')) {
-        onStart();
-        recognition.stop(); // Stop listening after wake word
+        onStart();       // Trigger app start
+        recognition.stop();
       }
     };
 
@@ -30,9 +35,9 @@ function LandingPage({ onStart }) {
     recognition.start();
 
     return () => {
-      recognition.stop(); // Cleanup
+      recognition.stop();
     };
-  }, [onStart]);
+  }, [onStart]); // <-- FIXED ESLINT WARNING
 
   return (
     <div style={styles.container}>
@@ -63,9 +68,7 @@ function LandingPage({ onStart }) {
   );
 }
 
-// -------------------------------
-// Styles
-// -------------------------------
+// Styles (unchanged)
 const styles = {
   container: {
     textAlign: 'center',
@@ -76,7 +79,11 @@ const styles = {
     minHeight: '100vh',
   },
   title: { fontSize: '48px', marginBottom: '20px' },
-  subtitle: { fontSize: '20px', marginBottom: '50px', color: '#555' },
+  subtitle: {
+    fontSize: '20px',
+    marginBottom: '50px',
+    color: '#555',
+  },
   micContainer: { marginBottom: '40px' },
   micIcon: { width: '100px', height: '100px' },
   micText: { fontSize: '16px', marginTop: '10px', color: '#777' },
