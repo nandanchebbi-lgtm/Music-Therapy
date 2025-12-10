@@ -25,9 +25,11 @@ export default function App() {
     setLoading(true);
 
     try {
-      const response = await axios.get("http://localhost:8888/api/searchPlaylists", {
+      // ✅ FIXED FOR VERCEL — no localhost
+      const response = await axios.get("/api/searchPlaylists", {
         params: { query: `${mood} music playlist` },
       });
+
       setPlaylists(response.data);
     } catch (error) {
       console.error("Error fetching playlists:", error);
@@ -61,7 +63,10 @@ export default function App() {
           {moods.map((m) => (
             <div
               key={m.name}
-              style={{ ...styles.moodCard, background: `linear-gradient(135deg, ${m.color} 0%, #fff 100%)` }}
+              style={{
+                ...styles.moodCard,
+                background: `linear-gradient(135deg, ${m.color} 0%, #fff 100%)`,
+              }}
               onClick={() => handleMoodSelect(m.name)}
               onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
