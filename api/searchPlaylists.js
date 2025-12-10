@@ -1,20 +1,17 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const { query } = req.query;
-  const YT_API_KEY = process.env.YOUTUBE_API_KEY;
-
-  if (!query) {
-    return res.status(400).json({ error: "Query parameter required" });
-  }
-
   try {
-    const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
+    const query = req.query.query || "relaxing music playlist";
+
+    const YT_URL = "https://www.googleapis.com/youtube/v3/search";
+
+    const response = await axios.get(YT_URL, {
       params: {
-        key: YT_API_KEY,
+        part: "snippet",
         q: query,
         type: "playlist",
-        part: "snippet",
+        key: process.env.YOUTUBE_API_KEY,
         maxResults: 10,
       },
     });
@@ -22,13 +19,12 @@ export default async function handler(req, res) {
     const playlists = response.data.items.map((item) => ({
       id: item.id.playlistId,
       title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails?.medium?.url || "",
+      thumbnail: item.snippet.thumbnails.medium.url,
     }));
 
     res.status(200).json(playlists);
-
   } catch (err) {
-    console.error("YouTube API Error:", err.response?.data || err.message);
+    console.error("API ERROR:", err);
     res.status(500).json({ error: "Failed to fetch playlists" });
   }
 }
