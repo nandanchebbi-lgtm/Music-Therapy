@@ -1,4 +1,9 @@
-// server.js
+// server.js (local only)
+if (process.env.VERCEL) {
+  console.log("Running on Vercel, skipping local Express server");
+  return;
+}
+
 const express = require("express");
 const axios = require("axios");
 require("dotenv").config();
@@ -20,8 +25,6 @@ if (!YT_API_KEY || !OPENAI_API_KEY) {
   console.error("❌ Missing API keys in .env");
   process.exit(1);
 }
-
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 // ---------------- Playlist Search ----------------
 app.get("/api/searchPlaylists", async (req, res) => {
@@ -52,7 +55,7 @@ app.get("/api/searchPlaylists", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`✅ API running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`✅ Local API running at http://localhost:${PORT}`));
 
 // ---------------- WebSocket Server ----------------
 const wss = new WebSocketServer({ port: WS_PORT });
@@ -70,12 +73,7 @@ wss.on("connection", async (ws) => {
   ws.on("message", async (msg) => {
     if (msg instanceof Buffer) {
       if (!realtime) return;
-
-      await realtime.send({
-        type: "input_audio_buffer.append",
-        audio: toBase64(msg),
-      });
-
+      await realtime.send({ type: "input_audio_buffer.append", audio: toBase64(msg) });
       return;
     }
 
