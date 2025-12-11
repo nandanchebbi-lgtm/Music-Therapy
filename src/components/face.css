@@ -1,0 +1,128 @@
+/* ==============================
+   CONTAINER FOR FACE + OVERLAY
+   ============================== */
+.face-container {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  margin: auto;
+}
+
+/* ==============================
+   OVERLAY CONTENT INSIDE FACE
+   ============================== */
+.face-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 30; /* above eyes and inner circle */
+  color: white;
+  text-align: center;
+  pointer-events: none;
+  font-size: 18px;
+}
+
+/* ==============================
+   MAIN FACE CIRCLE (350px)
+   ============================== */
+.face {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: #000;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 255, 100, 0.2);
+}
+
+/* ==============================
+   INNER CIRCLE (300px)
+   ============================== */
+.inner-circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* ==============================
+   EYES
+   ============================== */
+.eye {
+  width: 44px;
+  height: 44px;
+  background: yellow;
+  border-radius: 50%;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 22px yellow;
+  animation: blink 6s infinite;
+  transition: opacity 0.7s ease;
+  z-index: 20;
+}
+
+.eye.left { left: 80px; }
+.eye.right { right: 80px; }
+
+@keyframes blink {
+  0%, 92%, 100% { transform: translateY(-50%) scaleY(1); }
+  95% { transform: translateY(-50%) scaleY(0.1); }
+}
+
+/* ==============================
+   PROGRESS RING
+   ============================== */
+.progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 345px;
+  height: 345px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 14;
+}
+
+.progress-ring-bar {
+  fill: none;
+  stroke: #e25b45;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.2s linear;
+}
+
+/* ==============================
+   VIDEO INSIDE INNER CIRCLE
+   ============================== */
+.video-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  object-fit: cover;
+  border: none;
+  z-index: 10;
+}
