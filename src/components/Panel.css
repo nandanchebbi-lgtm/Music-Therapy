@@ -2,42 +2,101 @@
 .panel-right {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+
+  /* Emotional softness */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 30px rgba(226, 91, 69, 0.18),
+    inset 0 0 20px rgba(255, 255, 255, 0.15);
+
+  transition: all 0.4s ease;
 }
 
-/* ---- MODE BUTTONS ---- */
+/* ---- MODE BUTTONS (Mood Selection) ---- */
 .mode-button {
-  width: 120px;
-  padding: 12px;
-  border-radius: 10px;
+  width: 140px;
+  padding: 14px 12px;
+  border-radius: 18px;
   border: none;
-  font-size: 16px;
+
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  /* Gentle presence */
+  color: #ffffff;
+  opacity: 0.92;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    inset 0 0 10px rgba(255, 255, 255, 0.15);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .mode-button:hover {
-  transform: scale(1.06);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+  opacity: 1;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.22),
+    0 0 18px rgba(226, 91, 69, 0.35);
+}
+
+.mode-button:active {
+  transform: scale(0.98);
 }
 
 /* ---- START BUTTON ---- */
 .panel-btn {
-  width: 120px;
-  padding: 14px;
-  border-radius: 10px;
+  width: 150px;
+  padding: 16px 14px;
+  border-radius: 999px; /* pill shape = safety */
+
   border: none;
   font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+
   cursor: pointer;
-  background-color: #4caf50;
-  color: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  background: linear-gradient(
+    135deg,
+    #e25b45 0%,
+    #d64d3a 100%
+  );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 6px 20px rgba(226, 91, 69, 0.4),
+    inset 0 0 12px rgba(255, 255, 255, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .panel-btn:hover {
   transform: scale(1.06);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+
+  box-shadow:
+    0 10px 30px rgba(226, 91, 69, 0.6),
+    inset 0 0 14px rgba(255, 255, 255, 0.35);
+}
+
+.panel-btn:active {
+  transform: scale(0.97);
 }

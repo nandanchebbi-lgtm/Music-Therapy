@@ -41,13 +41,15 @@ function LandingPage({ onStart, elapsedTime = 0 }) {
         {showMic && (
           <div style={styles.centerContent}>
             <span style={styles.micIcon}>🎤</span>
-            <p style={styles.wakeText}>Say “Wake” to start</p>
+            <p style={styles.wakeText}>Say “Wake” to begin</p>
           </div>
         )}
       </BreathingFace>
 
       <div style={styles.panelContainer}>
-        <button style={styles.startButton} onClick={onStart}>Start</button>
+        <button style={styles.startButton} onClick={onStart}>
+          Start
+        </button>
       </div>
     </div>
   );
@@ -55,41 +57,57 @@ function LandingPage({ onStart, elapsedTime = 0 }) {
 
 const styles = {
   container: {
-    backgroundColor: "#1a1a1a",
-    color: "#fff",
+    background: "linear-gradient(135deg, #fff4ec 0%, #ffe0d4 50%, #ffd4d4 100%)",
+    color: "#3a1f1f",
     height: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
+    fontFamily: `"Inter", "Segoe UI", system-ui, sans-serif`,
   },
+
   centerContent: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    color: "#fff",
     textAlign: "center",
     pointerEvents: "none",
+    color: "#7b4b3a",
   },
-  micIcon: { fontSize: "48px", marginBottom: "10px" },
-  wakeText: { fontSize: "18px", color: "#ccc" },
+
+  micIcon: {
+    fontSize: "52px",
+    marginBottom: "12px",
+    filter: "drop-shadow(0 0 10px rgba(226,91,69,0.35))",
+  },
+
+  wakeText: {
+    fontSize: "18px",
+    fontStyle: "italic",
+    opacity: 0.9,
+  },
+
   panelContainer: {
     position: "absolute",
     right: "50px",
     top: "50%",
     transform: "translateY(-50%)",
   },
+
   startButton: {
-    padding: "20px 40px",
-    fontSize: "20px",
-    borderRadius: "50px",
+    padding: "18px 42px",
+    fontSize: "18px",
+    borderRadius: "999px",
     border: "none",
-    backgroundColor: "#4caf50",
+    backgroundColor: "#e25b45",
     color: "#fff",
     cursor: "pointer",
-    transition: "transform 0.2s, box-shadow 0.2s",
+    fontWeight: 600,
+    boxShadow: "0 10px 25px rgba(226,91,69,0.35)",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease",
   },
 };
 
